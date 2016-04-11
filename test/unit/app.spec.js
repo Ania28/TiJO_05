@@ -1,53 +1,41 @@
-describe('app', function () {
+(function () {
     'use strict';
-
-    var app = window.app;
-
-    var car;
-    xdescribe('Car', function () {
-        beforeEach(function () {
-            car = new app.Car('Audi', 1998);
-        });
-        describe('property', function () {
-            it('should defined model', function () {
-                expect(car.model).toBeDefined();
-            });
-            it('should defined year', function () {
-                expect(car.year).toBeDefined();
-            });
-        });
-        describe('value', function () {
-            it('should be set to Audi on model property', function () {
-                expect(car.model).toBe('Audi');
-            });
-
-            car = new app.Car('BMW', 2000);
-
-            it('should be set to 1998 on year property', function () {
-                expect(car.year).toBe(1998);
-            });
-        });
-    });
-
-    var carPortal;
-    describe('CarPortal', function () {
-        carPortal = new app.CarPortal();
-        afterEach(function () {
-            carPortal.logout();
-        });
-        it('should set username to john and password to 12345 when login is call', function () {
-            carPortal.login('john', '12345');
-            expect(carPortal.credentials).toEqual({username: 'john', password: '12345'});
-        });
-        it('should clean credentials after each it', function () {
-            expect(carPortal.credentials).toEqual({});
-        });
-        it('should set username to maria and password to qwerty when login is call', function () {
-            carPortal.login('maria', 'qwerty');
-            expect(carPortal.credentials).toEqual({username: 'maria', password: 'qwerty'});
-        });
-        it('should clean credentials after each it', function () {
-            expect(carPortal.credentials).toEqual({});
-        });
-    });
-});
+ 
+    window.app = {
+        isPalindrome: function (str) {
+            var strTemp = str.toLowerCase(),
+                strLength = strTemp.length;
+            if (str === '') {
+                return false;
+            }
+            var halfLength = (strLength % 2 === 0) ? (strLength / 2) : ((strLength - 1) / 2);
+            for (var i = 0; i < halfLength; i++) {
+                if (strTemp[i] !== strTemp.slice(-1 - i)[0]) {
+                    return false;
+                }
+            }
+            return true;
+        },
+ 
+        vowelCount: function (str) {
+            var vowelList = 'aeiouyAEIOUY',
+                vovCount = 0;
+            for (var i = 0, strLength = str.length; i < strLength; i++) {
+                if (vowelList.indexOf(str[i]) !== -1) {
+                    vovCount++;
+                }
+            }
+            return vovCount;
+        },
+        generateMessage: function (text) {
+            var palindrome = this.isPalindrome(text);
+            var vowel = this.vowelCount(text);
+            if (text.length > 0) {
+                return {vowel: vowel, palindrome: palindrome};
+            } else {
+                throw new Error('Empty string!');
+            }
+        }
+    };
+ 
+})();
