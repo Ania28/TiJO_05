@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-
+ 
     window.app = {
         isPalindrome: function (str) {
             var strTemp = str.toLowerCase(),
@@ -16,7 +16,7 @@
             }
             return true;
         },
-
+ 
         vowelCount: function (str) {
             var vowelList = 'aeiouyAEIOUY',
                 vovCount = 0;
@@ -37,8 +37,9 @@
             }
         }
     };
-
+ 
 })();
+
 
 
 
